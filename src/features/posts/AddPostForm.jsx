@@ -1,6 +1,5 @@
 import React, { useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { nanoid } from '@reduxjs/toolkit'
 
 import { postAdded } from './postsSlice'
 
@@ -17,9 +16,9 @@ function AddPostForm() {
 
     const onSavePostClicked = () => {
         if (title && content) {
-            dispatch(postAdded({ id: nanoid(), title, content }))
+            dispatch(postAdded(title, content))
             setTitle('')
-            // setContent('')
+            setContent('')
         }
     }
 
@@ -34,8 +33,9 @@ function AddPostForm() {
             
             <label htmlFor="postContent">post content:</label>
             <textarea name="postContent" id="postContent" cols="30" rows="10"
+                    value={content}
                     onChange={onContentChange}
-              >{content}</textarea>
+              ></textarea>
 
             <button type="button"
               onClick={onSavePostClicked}
